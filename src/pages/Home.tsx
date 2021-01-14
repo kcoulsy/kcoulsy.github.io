@@ -18,7 +18,7 @@ const Home: React.FC = () => {
         fetchProducts();
     }, []);
 
-    return <>{JSON.stringify(products, null, 4)}</>;
+    return <div data-test="page-home">{JSON.stringify(products, null, 4)}</div>;
 };
 
 export default Home;
