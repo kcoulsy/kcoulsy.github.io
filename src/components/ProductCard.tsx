@@ -19,6 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 <li>{product.price}</li>
                 <li>{product.colour}</li>
             </ul>
+            <button data-test="productcard-addtocart">Add to Cart</button>
         </div>
     );
 };

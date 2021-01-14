@@ -43,3 +43,11 @@ test('should contain product colour', () => {
     const wrapper = setup();
     expect(wrapper.text()).toContain(testProduct.colour);
 });
+
+test('should contain add to card button', () => {
+    const wrapper = setup();
+    const el = wrapper.find('[data-test="productcard-addtocart"]');
+    expect(el.length).toBe(1);
+});
+
+test('clicking add to card button should dispatch action', () => {});
