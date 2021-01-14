@@ -33,7 +33,7 @@ interface RemoveFromCartAction {
 type CartAction = AddToCartAction | UpdateQuantityAction | RemoveFromCartAction;
 
 const CartStateContext = createContext<CartItem[]>([]);
-const CartDispatchContext = createContext<Dispatch<CartAction> | null>(null);
+const CartDispatchContext = createContext<Dispatch<CartAction>>(() => {});
 
 export function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
     switch (action.type) {
@@ -85,6 +85,6 @@ const CartContextProvider: React.FC = ({ children }) => {
 };
 
 export const useCartStateContext = () => useContext(CartStateContext);
-export const useCartDispatchContext = () => useContext(CartStateContext);
+export const useCartDispatchContext = () => useContext(CartDispatchContext);
 
 export default CartContextProvider;
