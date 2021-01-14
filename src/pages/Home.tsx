@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Product } from '../types';
 import { fetchProducts } from '../actions';
+import ProductCard from './../components/ProductCard';
 
 const Home: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -12,7 +13,13 @@ const Home: React.FC = () => {
         });
     }, []);
 
-    return <div data-test="page-home">{JSON.stringify(products, null, 4)}</div>;
+    return (
+        <div data-test="page-home">
+            {products.map((product) => (
+                <ProductCard product={product} key={product.id} />
+            ))}
+        </div>
+    );
 };
 
 export default Home;
