@@ -1,20 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import AppRouter from './AppRouter';
-import { PATH_CART, PATH_HOME } from './constants/pageRoutes';
+import Navbar from './components/Navbar';
 
 function App() {
     return (
         <AppRouter>
-            <ul>
-                <li>
-                    <Link to={PATH_HOME}>Home</Link>
-                </li>
-                <li>
-                    <Link to={PATH_CART}>Cart</Link>
-                </li>
-            </ul>
+            <Navbar />
         </AppRouter>
     );
 }
