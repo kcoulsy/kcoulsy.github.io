@@ -2,17 +2,26 @@ import { shallow } from 'enzyme';
 
 import CartProduct from './CartProduct';
 import * as CartContextModule from '../contexts/cart';
+import { ProductColor } from '../types';
 
-const testProduct = {
+const testCartProduct = {
     productId: 1,
     quantity: 5,
+};
+
+const testProduct = {
+    id: 1,
+    name: 'test product',
+    img: 'srclink',
+    colour: ProductColor.Red,
+    price: 10,
 };
 
 const setup = () => {
     return shallow(
         <CartProduct
-            productId={testProduct.productId}
-            quantity={testProduct.quantity}
+            product={testProduct}
+            quantity={testCartProduct.quantity}
         />,
     );
 };
@@ -23,15 +32,33 @@ test('should render without error', () => {
     expect(component.length).toBe(1);
 });
 
-test('should display product name', () => {});
+test('should contain an img with products src', () => {
+    const wrapper = setup();
+    const el = wrapper.find('[data-test="productcard-image"]');
+    const props = el.props();
+    expect(props.src).toBe(testProduct.img);
+});
 
-test('should fetch product details', () => {});
+test('should contain product name', () => {
+    const wrapper = setup();
+    expect(wrapper.text()).toContain(testProduct.name);
+});
+
+test('should contain product price', () => {
+    const wrapper = setup();
+    expect(wrapper.text()).toContain(testProduct.price);
+});
+
+test('should contain product colour', () => {
+    const wrapper = setup();
+    expect(wrapper.text()).toContain(testProduct.colour);
+});
 
 describe('product quantity', () => {
     test('should display product quantity', () => {
         const wrapper = setup();
         const el = wrapper.find('[data-test="cartproduct-quantity"]');
-        expect(el.text()).toBe(testProduct.quantity.toString());
+        expect(el.text()).toBe(testCartProduct.quantity.toString());
     });
 
     test('should display product increment button', () => {
@@ -61,8 +88,8 @@ describe('product quantity', () => {
         expect(mockUseCartDispatchContext).toHaveBeenCalledWith({
             type: CartContextModule.CartActionType.UpdateQuantity,
             payload: {
-                productId: testProduct.productId,
-                quantity: testProduct.quantity + 1,
+                productId: testCartProduct.productId,
+                quantity: testCartProduct.quantity + 1,
             },
         });
     });
@@ -83,14 +110,14 @@ describe('product quantity', () => {
         expect(mockUseCartDispatchContext).toHaveBeenCalledWith({
             type: CartContextModule.CartActionType.UpdateQuantity,
             payload: {
-                productId: testProduct.productId,
-                quantity: testProduct.quantity - 1,
+                productId: testCartProduct.productId,
+                quantity: testCartProduct.quantity - 1,
             },
         });
     });
 
     test('should dispatch remove on decrementing when quantity is 1', () => {
-        const testProductWithSingleQty = {
+        const testCartProductWithSingleQty = {
             productId: 1,
             quantity: 1,
         };
@@ -102,8 +129,8 @@ describe('product quantity', () => {
 
         const wrapper = shallow(
             <CartProduct
-                productId={testProductWithSingleQty.productId}
-                quantity={testProductWithSingleQty.quantity}
+                product={testProduct}
+                quantity={testCartProductWithSingleQty.quantity}
             />,
         );
         const el = wrapper.find('[data-test="cartproduct-qty-dec"]');
@@ -113,7 +140,7 @@ describe('product quantity', () => {
         expect(mockUseCartDispatchContext).toHaveBeenCalledWith({
             type: CartContextModule.CartActionType.RemoveFromCart,
             payload: {
-                productId: testProduct.productId,
+                productId: testCartProduct.productId,
             },
         });
     });
@@ -141,7 +168,7 @@ describe('remove product button', () => {
         expect(mockUseCartDispatchContext).toHaveBeenCalledWith({
             type: CartContextModule.CartActionType.RemoveFromCart,
             payload: {
-                productId: testProduct.productId,
+                productId: testCartProduct.productId,
             },
         });
     });

@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { CartActionType, useCartDispatchContext } from '../contexts/cart';
+import { Product } from '../types';
 
 interface CartProductProps {
-    productId: number;
     quantity: number;
+    product: Product;
 }
-const CartProduct: React.FC<CartProductProps> = ({ productId, quantity }) => {
+
+const CartProduct: React.FC<CartProductProps> = ({ quantity, product }) => {
     const dispatch = useCartDispatchContext();
 
     const handleRemoveItem = (ev: React.MouseEvent<HTMLButtonElement>) => {
         dispatch({
             type: CartActionType.RemoveFromCart,
             payload: {
-                productId,
+                productId: product.id,
             },
         });
     };
@@ -22,7 +24,7 @@ const CartProduct: React.FC<CartProductProps> = ({ productId, quantity }) => {
         dispatch({
             type: CartActionType.UpdateQuantity,
             payload: {
-                productId,
+                productId: product.id,
                 quantity: quantity + 1,
             },
         });
@@ -32,7 +34,7 @@ const CartProduct: React.FC<CartProductProps> = ({ productId, quantity }) => {
             dispatch({
                 type: CartActionType.RemoveFromCart,
                 payload: {
-                    productId,
+                    productId: product.id,
                 },
             });
             return;
@@ -40,7 +42,7 @@ const CartProduct: React.FC<CartProductProps> = ({ productId, quantity }) => {
         dispatch({
             type: CartActionType.UpdateQuantity,
             payload: {
-                productId,
+                productId: product.id,
                 quantity: quantity - 1,
             },
         });
@@ -48,7 +50,14 @@ const CartProduct: React.FC<CartProductProps> = ({ productId, quantity }) => {
 
     return (
         <div data-test="component-cartproduct">
-            Item: {productId}
+            Item: {product.id}
+            {product.name}
+            {product.colour}£{product.price}
+            <img
+                src={product.img}
+                alt={product.name}
+                data-test="productcard-image"
+            />
             <div>
                 Qty:
                 <button

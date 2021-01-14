@@ -53,6 +53,7 @@ describe('cart quantity', () => {
 
         expect(el.text()).toContain('Cart');
     });
+
     test('should show qty of items in cart on the cart link if > 0', () => {
         const mockUseCartDispatchContext = jest.fn(() => [
             {
