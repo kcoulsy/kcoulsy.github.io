@@ -1,6 +1,11 @@
 import React from 'react';
 import { ProductColor } from '../types';
 
+/**
+ * I wanted to make this a generic filter component
+ * but decided to hardcode it to colours because of time
+ */
+
 interface FilterProps {
     onSelect: (value: ProductColor) => void;
 }
