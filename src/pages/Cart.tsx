@@ -42,7 +42,6 @@ const Cart: React.FC = () => {
                     const product = products.find(
                         (product) => product.id === cartItem.productId,
                     );
-                    console.log(product);
                     if (!product) return null;
                     return (
                         <CartProduct

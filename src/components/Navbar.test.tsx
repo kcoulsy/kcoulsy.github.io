@@ -35,12 +35,6 @@ test('should contain a link to the cart', () => {
     expect(props.to).toBe(PATH_CART);
 });
 
-test('should contain an input for searching', () => {
-    const wrapper = setup();
-    const el = wrapper.find('[data-test="navbar-search"]');
-    expect(el.length).toBe(1);
-});
-
 describe('cart quantity', () => {
     test('should not show qty of items in cart on the cart link 0', () => {
         const mockUseCartDispatchContext = jest.fn(() => []);

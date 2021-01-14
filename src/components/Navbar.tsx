@@ -16,10 +16,6 @@ const Navbar: React.FC = () => {
                 <Link to={PATH_HOME} data-test="navbar-link-home">
                     Home
                 </Link>
-                <input
-                    placeholder="Search items..."
-                    data-test="navbar-search"
-                />
                 <Link to={PATH_CART} data-test="navbar-link-cart">
                     Cart {totalQty > 0 && `(${totalQty})`}
                 </Link>
