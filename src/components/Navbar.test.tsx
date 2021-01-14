@@ -37,9 +37,9 @@ test('should contain a link to the cart', () => {
 
 describe('cart quantity', () => {
     test('should not show qty of items in cart on the cart link 0', () => {
-        const mockUseCartDispatchContext = jest.fn(() => []);
+        const mockUseCartStateContext = jest.fn(() => []);
         jest.spyOn(CartContextModule, 'useCartStateContext').mockImplementation(
-            mockUseCartDispatchContext,
+            mockUseCartStateContext,
         );
 
         const wrapper = setup();
@@ -49,14 +49,14 @@ describe('cart quantity', () => {
     });
 
     test('should show qty of items in cart on the cart link if > 0', () => {
-        const mockUseCartDispatchContext = jest.fn(() => [
+        const mockUseCartStateContext = jest.fn(() => [
             {
                 productId: 1,
                 quantity: 1,
             },
         ]);
         jest.spyOn(CartContextModule, 'useCartStateContext').mockImplementation(
-            mockUseCartDispatchContext,
+            mockUseCartStateContext,
         );
 
         const wrapper = setup();
@@ -66,7 +66,7 @@ describe('cart quantity', () => {
     });
 
     test('should contain number of all of quantities of each item added together', () => {
-        const mockUseCartDispatchContext = jest.fn(() => [
+        const mockUseCartStateContext = jest.fn(() => [
             {
                 productId: 1,
                 quantity: 10,
@@ -77,7 +77,7 @@ describe('cart quantity', () => {
             },
         ]);
         jest.spyOn(CartContextModule, 'useCartStateContext').mockImplementation(
-            mockUseCartDispatchContext,
+            mockUseCartStateContext,
         );
 
         const wrapper = setup();

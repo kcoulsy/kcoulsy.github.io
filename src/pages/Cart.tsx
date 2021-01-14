@@ -28,7 +28,7 @@ const Cart: React.FC = () => {
     }
 
     return (
-        <>
+        <div data-test="page-cart">
             {!cartItems.length ? (
                 <>
                     <p>You currently have no items in your basket!</p>
@@ -52,7 +52,7 @@ const Cart: React.FC = () => {
                     );
                 })
             )}
-        </>
+        </div>
     );
 };
 

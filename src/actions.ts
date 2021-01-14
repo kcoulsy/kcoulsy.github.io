@@ -8,6 +8,7 @@ export const fetchProducts = () => axios.get<Product[]>(PRODUCTS_URL);
 
 export const fetchCart = async (ids: number[]) => {
     const products = await fetchProducts();
+
     const filteredProducts = products.data.filter((product) =>
         ids.includes(product.id),
     );

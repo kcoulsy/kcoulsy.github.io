@@ -32,8 +32,10 @@ interface RemoveFromCartAction {
 
 type CartAction = AddToCartAction | UpdateQuantityAction | RemoveFromCartAction;
 
-const CartStateContext = createContext<CartItem[]>([]);
-const CartDispatchContext = createContext<Dispatch<CartAction>>(() => {});
+export const CartStateContext = createContext<CartItem[]>([]);
+export const CartDispatchContext = createContext<Dispatch<CartAction>>(
+    () => {},
+);
 
 export function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
     switch (action.type) {
