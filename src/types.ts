@@ -7,6 +7,7 @@ export interface Product {
 }
 
 export enum ProductColor {
+    All = 'All',
     Black = 'Black',
     Stone = 'Stone',
     Red = 'Red',
