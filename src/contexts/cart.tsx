@@ -38,17 +38,23 @@ const CartDispatchContext = createContext<Dispatch<CartAction>>(() => {});
 export function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
     switch (action.type) {
         case CartActionType.AddToCart:
-            if (
-                state.find(
-                    (item) => item.productId === action.payload.productId,
-                )
-            ) {
-                return state.map((item) => {
-                    if (item.productId === action.payload.productId) {
-                        item.quantity++;
-                    }
-                    return item;
-                });
+            const existingItem = state.find(
+                (item) => item.productId === action.payload.productId,
+            );
+            if (existingItem) {
+                // If the item was in the cart already we will increment the qty by 1
+                const oldQty = existingItem.quantity;
+                const newState = [
+                    ...state.filter(
+                        (item) => item.productId !== action.payload.productId,
+                    ),
+                    {
+                        productId: action.payload.productId,
+                        quantity: oldQty + 1,
+                    },
+                ];
+
+                return newState;
             }
             return [
                 ...state,
