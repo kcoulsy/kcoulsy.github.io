@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import ProductCard from './ProductCard';
 import { Product, ProductColor } from './../types';
+import * as CartContextModule from '../contexts/cart';
 
 const testProduct: Product = {
     id: 1,
@@ -50,4 +51,15 @@ test('should contain add to card button', () => {
     expect(el.length).toBe(1);
 });
 
-test('clicking add to card button should dispatch action', () => {});
+test('clicking add to card button should dispatch action', () => {
+    const mockUseCartDispatchContext = jest.fn();
+    jest.spyOn(CartContextModule, 'useCartDispatchContext').mockImplementation(
+        () => mockUseCartDispatchContext,
+    );
+
+    const wrapper = setup();
+    const el = wrapper.find('[data-test="productcard-addtocart"]');
+    el.simulate('click', { preventDefault() {} });
+
+    expect(mockUseCartDispatchContext).toHaveBeenCalledTimes(1);
+});
