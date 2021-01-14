@@ -21,7 +21,12 @@ const CartProduct: React.FC<CartProductProps> = ({ productId, quantity }) => {
     return (
         <div data-test="component-cartproduct">
             Item: {productId} - Qty: {quantity}
-            <button onClick={handleRemoveItem}>Remove Item</button>
+            <button
+                onClick={handleRemoveItem}
+                data-test="cartproduct-removebutton"
+            >
+                Remove Item
+            </button>
         </div>
     );
 };

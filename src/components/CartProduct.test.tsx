@@ -1,5 +1,7 @@
 import { shallow } from 'enzyme';
+
 import CartProduct from './CartProduct';
+import * as CartContextModule from '../contexts/cart';
 
 const testProduct = {
     productId: 1,
@@ -31,8 +33,31 @@ describe('product quanitity', () => {
 });
 
 describe('remove product button', () => {
-    test('should remove product button', () => {});
-    test('should dispatch remove product when clicked', () => {});
+    test('should display remove product button', () => {
+        const wrapper = setup();
+        const el = wrapper.find('[data-test="cartproduct-removebutton"]');
+        expect(el.length).toBe(1);
+    });
+
+    test('should dispatch remove product when clicked', () => {
+        const mockUseCartDispatchContext = jest.fn();
+        jest.spyOn(
+            CartContextModule,
+            'useCartDispatchContext',
+        ).mockImplementation(() => mockUseCartDispatchContext);
+
+        const wrapper = setup();
+        const el = wrapper.find('[data-test="cartproduct-removebutton"]');
+        el.simulate('click', { preventDefault() {} });
+
+        expect(mockUseCartDispatchContext).toHaveBeenCalledTimes(1);
+        expect(mockUseCartDispatchContext).toHaveBeenCalledWith({
+            type: CartContextModule.CartActionType.RemoveFromCart,
+            payload: {
+                productId: testProduct.productId,
+            },
+        });
+    });
 });
 
 export {};
