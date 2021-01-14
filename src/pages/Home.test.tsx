@@ -1,5 +1,6 @@
-import React from 'react';
-import { shallow } from 'enzyme';
+import * as React from 'react';
+import { mount, shallow } from 'enzyme';
+import axios from 'axios';
 
 import Home from './Home';
 
@@ -14,7 +15,19 @@ test('should render without error', () => {
 });
 
 describe('fetching products from api', () => {
-    test('should call api on app load', () => {});
+    const setState = jest.fn();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const useStateMock: any = (initState: any) => [initState, setState];
 
-    test('should update products state with returned products', () => {});
+    beforeEach(() => {
+        jest.spyOn(React, 'useState').mockImplementation(useStateMock);
+        jest.spyOn(axios, 'get').mockImplementation(
+            jest.fn(() => Promise.resolve({ data: [] })),
+        );
+    });
+
+    test('should call api and update state with products', async () => {
+        await mount(<Home />);
+        expect(setState).toHaveBeenCalledTimes(1);
+    });
 });
