@@ -37,9 +37,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     <p className="text-2xl uppercase text-gray-900 font-bold">
                         {product.name}
                     </p>
+                    <p className="uppercase text-sm text-gray-400">
+                        {product.colour}
+                    </p>
                 </div>
 
-                <div className="md:my-5 relative">
+                <div className="md:my-3 relative">
                     <img
                         src={product.img}
                         alt={product.name}
