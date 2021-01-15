@@ -12,9 +12,11 @@ const Cart: React.FC = () => {
         <div data-test="page-cart">
             {!items.length ? (
                 <>
-                    <p>You currently have no items in your basket!</p>
+                    <p data-test="cart-no-items">
+                        You currently have no items in your basket!
+                    </p>
 
-                    <Link to={PATH_HOME} data-test="navbar-link-home">
+                    <Link to={PATH_HOME} data-test="cart-link-home">
                         Click Here to view the products again!
                     </Link>
                 </>
