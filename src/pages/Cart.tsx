@@ -9,7 +9,12 @@ const Cart: React.FC = () => {
     const { items, totalPrice } = useCartStateContext();
 
     return (
-        <div data-test="page-cart" className="container mx-auto">
+        <div data-test="page-cart" className="container mx-auto mt-6">
+            <div className="mx-10 md:mx-0">
+                <h2 className="text-3xl font-semibold text-gray-800 md:text-4xl">
+                    Cart
+                </h2>
+            </div>
             {!items.length ? (
                 <>
                     <p data-test="cart-no-items">
