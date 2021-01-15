@@ -27,14 +27,19 @@ const Home: React.FC = () => {
 
     return (
         <div data-test="page-home" className="container mx-auto">
+            <h2 className="text-3xl font-semibold text-gray-800 md:text-4xl px-10">
+                Products
+            </h2>
             <Filter
                 onSelect={(colour) => {
                     setColorFilter(colour);
                 }}
             />
-            {filteredProducts.map((product) => (
-                <ProductCard product={product} key={product.id} />
-            ))}
+            <div className="flex flex-row flex-wrap mx-auto">
+                {filteredProducts.map((product) => (
+                    <ProductCard product={product} key={product.id} />
+                ))}
+            </div>
         </div>
     );
 };
