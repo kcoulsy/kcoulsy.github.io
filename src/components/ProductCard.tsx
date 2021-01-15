@@ -11,9 +11,9 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-    const cartItems = useCartStateContext();
+    const { items } = useCartStateContext();
     const dispatch = useCartDispatchContext();
-    const productInCart = cartItems.find(
+    const productInCart = items.find(
         (cartItem) => cartItem.product.id === product.id,
     );
     const qtyInCart = productInCart?.quantity;

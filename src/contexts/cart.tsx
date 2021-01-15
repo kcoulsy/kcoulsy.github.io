@@ -34,7 +34,19 @@ interface RemoveFromCartAction {
 
 type CartAction = AddToCartAction | UpdateQuantityAction | RemoveFromCartAction;
 
-export const CartStateContext = createContext<CartItem[]>([]);
+interface CartState {
+    items: CartItem[];
+    totalQuantity: number;
+    totalPrice: number;
+}
+
+const initialCartState = {
+    items: [],
+    totalQuantity: 0,
+    totalPrice: 0,
+};
+
+export const CartStateContext = createContext<CartState>(initialCartState);
 export const CartDispatchContext = createContext<Dispatch<CartAction>>(
     () => {},
 );
@@ -82,8 +94,21 @@ export function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
 
 const CartContextProvider: React.FC = ({ children }) => {
     const [state, dispatch] = useReducer(cartReducer, []);
+    const totalQuantity = state.reduce((acc, curr) => {
+        acc += curr.quantity;
+        return acc;
+    }, 0);
+    const totalPrice = state.reduce((acc, curr) => {
+        acc += curr.product.price;
+        return acc;
+    }, 0);
+    const stateContextValue = {
+        items: state,
+        totalQuantity,
+        totalPrice,
+    };
     return (
-        <CartStateContext.Provider value={state}>
+        <CartStateContext.Provider value={stateContextValue}>
             <CartDispatchContext.Provider value={dispatch}>
                 {children}
             </CartDispatchContext.Provider>

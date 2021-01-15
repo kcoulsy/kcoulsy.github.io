@@ -4,11 +4,7 @@ import { useCartStateContext } from '../contexts/cart';
 import { PATH_CART, PATH_HOME } from './../constants/pageRoutes';
 
 const Navbar: React.FC = () => {
-    const cartItems = useCartStateContext();
-    const totalQty = cartItems.reduce((acc, curr) => {
-        acc += curr.quantity;
-        return acc;
-    }, 0);
+    const { totalQuantity } = useCartStateContext();
 
     return (
         <nav data-test="component-navbar">
@@ -17,7 +13,7 @@ const Navbar: React.FC = () => {
                     Home
                 </Link>
                 <Link to={PATH_CART} data-test="navbar-link-cart">
-                    Cart {totalQty > 0 && `(${totalQty})`}
+                    Cart {totalQuantity > 0 && `(${totalQuantity})`}
                 </Link>
             </div>
         </nav>

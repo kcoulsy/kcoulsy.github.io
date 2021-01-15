@@ -37,7 +37,11 @@ test('should contain a link to the cart', () => {
 
 describe('cart quantity', () => {
     test('should not show qty of items in cart on the cart link 0', () => {
-        const mockUseCartStateContext = jest.fn(() => []);
+        const mockUseCartStateContext = jest.fn(() => ({
+            items: [],
+            totalQuantity: 0,
+            totalPrice: 0,
+        }));
         jest.spyOn(CartContextModule, 'useCartStateContext').mockImplementation(
             mockUseCartStateContext,
         );
@@ -49,12 +53,16 @@ describe('cart quantity', () => {
     });
 
     test('should show qty of items in cart on the cart link if > 0', () => {
-        const mockUseCartStateContext = jest.fn(() => [
-            {
-                productId: 1,
-                quantity: 1,
-            },
-        ]);
+        /**
+         * In this case, since totalQuantity is computed in state,
+         *  we don't care that there are no items returned, only the totalQuantity
+         */
+        const mockUseCartStateContext = jest.fn(() => ({
+            items: [],
+            totalQuantity: 10,
+            totalPrice: 0,
+        }));
+
         jest.spyOn(CartContextModule, 'useCartStateContext').mockImplementation(
             mockUseCartStateContext,
         );
@@ -62,27 +70,6 @@ describe('cart quantity', () => {
         const wrapper = setup();
         const el = wrapper.find('[data-test="navbar-link-cart"]');
 
-        expect(el.text()).toContain('1)');
-    });
-
-    test('should contain number of all of quantities of each item added together', () => {
-        const mockUseCartStateContext = jest.fn(() => [
-            {
-                productId: 1,
-                quantity: 10,
-            },
-            {
-                productId: 2,
-                quantity: 3,
-            },
-        ]);
-        jest.spyOn(CartContextModule, 'useCartStateContext').mockImplementation(
-            mockUseCartStateContext,
-        );
-
-        const wrapper = setup();
-        const el = wrapper.find('[data-test="navbar-link-cart"]');
-
-        expect(el.text()).toContain('13');
+        expect(el.text()).toContain('Cart (10)');
     });
 });

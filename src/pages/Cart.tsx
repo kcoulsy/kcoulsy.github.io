@@ -6,11 +6,11 @@ import CartProduct from './../components/CartProduct';
 import { PATH_HOME } from './../constants/pageRoutes';
 
 const Cart: React.FC = () => {
-    const cartItems = useCartStateContext();
+    const { items } = useCartStateContext();
 
     return (
         <div data-test="page-cart">
-            {!cartItems.length ? (
+            {!items.length ? (
                 <>
                     <p>You currently have no items in your basket!</p>
 
@@ -19,12 +19,12 @@ const Cart: React.FC = () => {
                     </Link>
                 </>
             ) : (
-                cartItems.map((cartItem) => {
+                items.map(({ product, quantity }) => {
                     return (
                         <CartProduct
-                            key={cartItem.product.id}
-                            quantity={cartItem.quantity}
-                            product={cartItem.product}
+                            key={product.id}
+                            quantity={quantity}
+                            product={product}
                         />
                     );
                 })
