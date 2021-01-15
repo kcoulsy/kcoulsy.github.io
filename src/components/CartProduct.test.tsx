@@ -57,8 +57,8 @@ test('should contain product colour', () => {
 describe('product quantity', () => {
     test('should display product quantity', () => {
         const wrapper = setup();
-        const el = wrapper.find('[data-test="cartproduct-quantity"]');
-        expect(el.text()).toBe(testCartProduct.quantity.toString());
+        const el = wrapper.find('[data-test="cartproduct-qty-input"]');
+        expect(el.prop('value')).toBe(testCartProduct.quantity);
     });
 
     test('should display product increment button', () => {
@@ -71,6 +71,27 @@ describe('product quantity', () => {
         const wrapper = setup();
         const el = wrapper.find('[data-test="cartproduct-qty-dec"]');
         expect(el.length).toBe(1);
+    });
+
+    test('should dispatch quanity update on incrementing', () => {
+        const mockUseCartDispatchContext = jest.fn();
+        jest.spyOn(
+            CartContextModule,
+            'useCartDispatchContext',
+        ).mockImplementation(() => mockUseCartDispatchContext);
+
+        const wrapper = setup();
+        const el = wrapper.find('[data-test="cartproduct-qty-input"]');
+        el.simulate('change', { target: { value: 10 } });
+
+        expect(mockUseCartDispatchContext).toHaveBeenCalledTimes(1);
+        expect(mockUseCartDispatchContext).toHaveBeenCalledWith({
+            type: CartContextModule.CartActionType.UpdateQuantity,
+            payload: {
+                id: testCartProduct.product.id,
+                quantity: 10,
+            },
+        });
     });
 
     test('should dispatch quanity update on incrementing', () => {

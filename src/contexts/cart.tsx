@@ -102,13 +102,13 @@ const CartContextProvider: React.FC = ({ children }) => {
         return acc;
     }, 0);
     const totalPrice = state.reduce((acc, curr) => {
-        acc += curr.product.price;
+        acc += curr.product.price * curr.quantity;
         return acc;
     }, 0);
     const stateContextValue = {
         items: state,
         totalQuantity,
-        totalPrice,
+        totalPrice: Math.round(totalPrice * 100) / 100,
     };
     return (
         <CartStateContext.Provider value={stateContextValue}>

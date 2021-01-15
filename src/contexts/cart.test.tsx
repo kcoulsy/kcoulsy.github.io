@@ -168,7 +168,7 @@ describe('testing contexts', () => {
         expect(JSON.parse(stateValue)).toEqual({
             items: [{ product: dispatchAction.payload, quantity: 2 }],
             totalQuantity: 2,
-            totalPrice: dispatchAction.payload.price,
+            totalPrice: dispatchAction.payload.price * 2,
         });
     });
 
@@ -202,7 +202,7 @@ describe('testing contexts', () => {
         expect(JSON.parse(stateValue)).toEqual({
             items: [{ product: dispatchAddAction.payload, quantity: 10 }],
             totalQuantity: 10,
-            totalPrice: dispatchAddAction.payload.price,
+            totalPrice: dispatchAddAction.payload.price * 10,
         });
     });
 
