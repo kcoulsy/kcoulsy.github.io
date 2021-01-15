@@ -1,4 +1,5 @@
 import { mount, shallow } from 'enzyme';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import Cart from './Cart';
 import * as CartContextModule from '../contexts/cart';
@@ -38,6 +39,17 @@ describe('if items === 0', () => {
 
         expect(el.length).toBe(1);
     });
+
+    test('should not render any products', () => {
+        const wrapper = mount(
+            <Router>
+                <Cart />
+            </Router>,
+        );
+        const el = wrapper.find('[data-test="component-cartproduct"]');
+
+        expect(el.length).toBe(0);
+    });
 });
 
 describe('if items > 0', () => {
@@ -70,6 +82,20 @@ describe('if items > 0', () => {
                 totalPrice: 20,
             }),
         );
+    });
+
+    test('should not show no items message', () => {
+        const wrapper = setup();
+        const el = wrapper.find('[data-test="cart-no-items"]');
+
+        expect(el.length).toBe(0);
+    });
+
+    test('should not show link back to home', () => {
+        const wrapper = setup();
+        const el = wrapper.find('[data-test="cart-link-home"]');
+
+        expect(el.length).toBe(0);
     });
 
     test('should render products', () => {

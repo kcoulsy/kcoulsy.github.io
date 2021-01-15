@@ -32,7 +32,10 @@ interface RemoveFromCartAction {
     };
 }
 
-type CartAction = AddToCartAction | UpdateQuantityAction | RemoveFromCartAction;
+export type CartAction =
+    | AddToCartAction
+    | UpdateQuantityAction
+    | RemoveFromCartAction;
 
 interface CartState {
     items: CartItem[];
