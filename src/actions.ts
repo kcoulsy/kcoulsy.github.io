@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { Product } from './types';
 
 const PRODUCTS_URL =

@@ -33,11 +33,7 @@ const Home: React.FC = () => {
                 </h2>
                 <div className="flex items-center">
                     <span className="font-bold text-2xl pr-3">Color:</span>
-                    <Filter
-                        onSelect={(colour) => {
-                            setColorFilter(colour);
-                        }}
-                    />
+                    <Filter onSelect={(colour) => setColorFilter(colour)} />
                 </div>
             </div>
             <div className="flex flex-row flex-wrap mx-auto">

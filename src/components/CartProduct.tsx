@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { CartActionType, useCartDispatchContext } from '../contexts/cart';
 import { Product } from '../types';
@@ -66,32 +66,28 @@ const CartProduct: React.FC<CartProductProps> = ({ quantity, product }) => {
     return (
         <tr data-test="component-cartproduct">
             <td className="hidden pb-4 md:table-cell">
-                <a href="#">
-                    <img
-                        className="w-20 rounded"
-                        src={product.img}
-                        alt={product.name}
-                        data-test="productcard-image"
-                    />
-                </a>
+                <img
+                    className="w-20 rounded"
+                    src={product.img}
+                    alt={product.name}
+                    data-test="productcard-image"
+                />
             </td>
             <td>
-                <a href="#">
-                    <p className="mb-2 md:ml-4">
-                        {product.name}
-                        <span className="text-sm uppercase text-gray-400 pl-2">
-                            {product.colour}
-                        </span>
-                    </p>
-                    <button
-                        type="submit"
-                        className="text-gray-700 md:ml-4 hover:text-gray-500"
-                        onClick={handleRemoveItem}
-                        data-test="cartproduct-removebutton"
-                    >
-                        <small>(Remove item)</small>
-                    </button>
-                </a>
+                <p className="mb-2 md:ml-4">
+                    {product.name}
+                    <span className="text-sm uppercase text-gray-400 pl-2">
+                        {product.colour}
+                    </span>
+                </p>
+                <button
+                    type="submit"
+                    className="text-gray-700 md:ml-4 hover:text-gray-500"
+                    onClick={handleRemoveItem}
+                    data-test="cartproduct-removebutton"
+                >
+                    <small>(Remove item)</small>
+                </button>
             </td>
             <td>
                 <div className="flex justify-end ">

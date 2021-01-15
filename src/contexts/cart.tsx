@@ -86,9 +86,7 @@ export function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
             });
         case CartActionType.RemoveFromCart:
             return state.filter((item) => {
-                if (item.product.id != action.payload.id) {
-                    return item;
-                }
+                return item.product.id !== action.payload.id;
             });
         default:
             return state;

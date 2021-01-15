@@ -1,5 +1,6 @@
 import axios from 'axios';
 import moxios from 'moxios';
+
 import * as actions from './actions';
 import { Product, ProductColor } from './types';
 
