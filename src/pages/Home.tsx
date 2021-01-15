@@ -26,7 +26,7 @@ const Home: React.FC = () => {
     }
 
     return (
-        <div data-test="page-home">
+        <div data-test="page-home" className="container mx-auto">
             <Filter
                 onSelect={(colour) => {
                     setColorFilter(colour);
