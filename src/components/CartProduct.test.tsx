@@ -4,17 +4,17 @@ import CartProduct from './CartProduct';
 import * as CartContextModule from '../contexts/cart';
 import { ProductColor } from '../types';
 
-const testCartProduct = {
-    productId: 1,
-    quantity: 5,
-};
-
 const testProduct = {
     id: 1,
     name: 'test product',
     img: 'srclink',
     colour: ProductColor.Red,
     price: 10,
+};
+
+const testCartProduct = {
+    product: testProduct,
+    quantity: 5,
 };
 
 const setup = () => {
@@ -88,7 +88,7 @@ describe('product quantity', () => {
         expect(mockUseCartDispatchContext).toHaveBeenCalledWith({
             type: CartContextModule.CartActionType.UpdateQuantity,
             payload: {
-                productId: testCartProduct.productId,
+                id: testCartProduct.product.id,
                 quantity: testCartProduct.quantity + 1,
             },
         });
@@ -110,7 +110,7 @@ describe('product quantity', () => {
         expect(mockUseCartDispatchContext).toHaveBeenCalledWith({
             type: CartContextModule.CartActionType.UpdateQuantity,
             payload: {
-                productId: testCartProduct.productId,
+                id: testCartProduct.product.id,
                 quantity: testCartProduct.quantity - 1,
             },
         });
@@ -140,7 +140,7 @@ describe('product quantity', () => {
         expect(mockUseCartDispatchContext).toHaveBeenCalledWith({
             type: CartContextModule.CartActionType.RemoveFromCart,
             payload: {
-                productId: testCartProduct.productId,
+                id: testCartProduct.product.id,
             },
         });
     });
@@ -168,7 +168,7 @@ describe('remove product button', () => {
         expect(mockUseCartDispatchContext).toHaveBeenCalledWith({
             type: CartContextModule.CartActionType.RemoveFromCart,
             payload: {
-                productId: testCartProduct.productId,
+                id: testCartProduct.product.id,
             },
         });
     });

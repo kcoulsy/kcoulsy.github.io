@@ -14,7 +14,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const cartItems = useCartStateContext();
     const dispatch = useCartDispatchContext();
     const productInCart = cartItems.find(
-        (cartItem) => cartItem.productId === product.id,
+        (cartItem) => cartItem.product.id === product.id,
     );
     const qtyInCart = productInCart?.quantity;
 
@@ -22,9 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         ev.preventDefault();
         dispatch({
             type: CartActionType.AddToCart,
-            payload: {
-                productId: product.id,
-            },
+            payload: product,
         });
     };
 

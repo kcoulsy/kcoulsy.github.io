@@ -1,31 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useCartStateContext } from '../contexts/cart';
 import CartProduct from './../components/CartProduct';
 import { PATH_HOME } from './../constants/pageRoutes';
-import { fetchCart } from '../actions';
-import { Product } from '../types';
 
 const Cart: React.FC = () => {
     const cartItems = useCartStateContext();
-    const [loading, setLoading] = useState(false);
-    const [products, setProducts] = useState<Product[]>([]);
-
-    useEffect(() => {
-        const itemIds = cartItems.map((cartItem) => cartItem.productId);
-        if (itemIds.length) {
-            setLoading(true);
-            fetchCart(itemIds).then((response) => {
-                setLoading(false);
-                setProducts(response.data);
-            });
-        }
-    }, []);
-
-    if (loading) {
-        return <>Loading cart</>;
-    }
 
     return (
         <div data-test="page-cart">
@@ -39,15 +20,11 @@ const Cart: React.FC = () => {
                 </>
             ) : (
                 cartItems.map((cartItem) => {
-                    const product = products.find(
-                        (product) => product.id === cartItem.productId,
-                    );
-                    if (!product) return null;
                     return (
                         <CartProduct
-                            key={cartItem.productId}
+                            key={cartItem.product.id}
                             quantity={cartItem.quantity}
-                            product={product}
+                            product={cartItem.product}
                         />
                     );
                 })

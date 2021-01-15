@@ -15,7 +15,7 @@ const CartProduct: React.FC<CartProductProps> = ({ quantity, product }) => {
         dispatch({
             type: CartActionType.RemoveFromCart,
             payload: {
-                productId: product.id,
+                id: product.id,
             },
         });
     };
@@ -24,17 +24,18 @@ const CartProduct: React.FC<CartProductProps> = ({ quantity, product }) => {
         dispatch({
             type: CartActionType.UpdateQuantity,
             payload: {
-                productId: product.id,
+                id: product.id,
                 quantity: quantity + 1,
             },
         });
     };
+
     const handleQtyDecrement = (ev: React.MouseEvent<HTMLButtonElement>) => {
         if (quantity === 1) {
             dispatch({
                 type: CartActionType.RemoveFromCart,
                 payload: {
-                    productId: product.id,
+                    id: product.id,
                 },
             });
             return;
@@ -42,7 +43,7 @@ const CartProduct: React.FC<CartProductProps> = ({ quantity, product }) => {
         dispatch({
             type: CartActionType.UpdateQuantity,
             payload: {
-                productId: product.id,
+                id: product.id,
                 quantity: quantity - 1,
             },
         });

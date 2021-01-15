@@ -1,7 +1,8 @@
 import React, { Dispatch, createContext, useReducer, useContext } from 'react';
+import { Product } from './../types';
 
 export interface CartItem {
-    productId: number;
+    product: Product;
     quantity: number;
 }
 
@@ -13,20 +14,21 @@ export enum CartActionType {
 
 interface AddToCartAction {
     type: CartActionType.AddToCart;
-    payload: {
-        productId: number;
-    };
+    payload: Product;
 }
 
 interface UpdateQuantityAction {
     type: CartActionType.UpdateQuantity;
-    payload: CartItem;
+    payload: {
+        id: number;
+        quantity: number;
+    };
 }
 
 interface RemoveFromCartAction {
     type: CartActionType.RemoveFromCart;
     payload: {
-        productId: number;
+        id: number;
     };
 }
 
@@ -41,38 +43,35 @@ export function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
     switch (action.type) {
         case CartActionType.AddToCart:
             const existingItem = state.find(
-                (item) => item.productId === action.payload.productId,
+                (item) => item.product.id === action.payload.id,
             );
             if (existingItem) {
                 // If the item was in the cart already we will increment the qty by 1
                 const oldQty = existingItem.quantity;
                 const newState = [
                     ...state.filter(
-                        (item) => item.productId !== action.payload.productId,
+                        (item) => item.product.id !== action.payload.id,
                     ),
                     {
-                        productId: action.payload.productId,
+                        product: action.payload,
                         quantity: oldQty + 1,
                     },
                 ];
 
                 return newState;
             }
-            return [
-                ...state,
-                { productId: action.payload.productId, quantity: 1 },
-            ];
+            return [...state, { product: action.payload, quantity: 1 }];
 
         case CartActionType.UpdateQuantity:
             return state.map((item) => {
-                if (item.productId === action.payload.productId) {
+                if (item.product.id === action.payload.id) {
                     item.quantity = action.payload.quantity;
                 }
                 return item;
             });
         case CartActionType.RemoveFromCart:
             return state.filter((item) => {
-                if (item.productId != action.payload.productId) {
+                if (item.product.id != action.payload.id) {
                     return item;
                 }
             });
