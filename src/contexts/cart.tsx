@@ -1,4 +1,5 @@
 import React, { Dispatch, createContext, useReducer, useContext } from 'react';
+
 import { Product } from './../types';
 
 export interface CartItem {
