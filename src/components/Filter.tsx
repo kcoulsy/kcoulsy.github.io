@@ -18,6 +18,7 @@ const Filter: React.FC<FilterProps> = ({ onSelect }) => {
             <select
                 onChange={(ev) => onSelect(ev.target.value as ProductColor)}
                 data-test="filter-select"
+                className="text-xl pt-1"
             >
                 {options.map((colour) => (
                     <option

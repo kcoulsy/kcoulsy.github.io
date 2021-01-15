@@ -26,15 +26,20 @@ const Home: React.FC = () => {
     }
 
     return (
-        <div data-test="page-home" className="container mx-auto">
-            <h2 className="text-3xl font-semibold text-gray-800 md:text-4xl px-10">
-                Products
-            </h2>
-            <Filter
-                onSelect={(colour) => {
-                    setColorFilter(colour);
-                }}
-            />
+        <div data-test="page-home" className="container mx-auto mt-6">
+            <div className="flex justify-between items-center mx-10 md:mx-0">
+                <h2 className="text-3xl font-semibold text-gray-800 md:text-4xl">
+                    Products
+                </h2>
+                <div className="flex items-center">
+                    <span className="font-bold text-2xl pr-3">Color:</span>
+                    <Filter
+                        onSelect={(colour) => {
+                            setColorFilter(colour);
+                        }}
+                    />
+                </div>
+            </div>
             <div className="flex flex-row flex-wrap mx-auto">
                 {filteredProducts.map((product) => (
                     <ProductCard product={product} key={product.id} />
