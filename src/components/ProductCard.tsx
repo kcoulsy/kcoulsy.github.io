@@ -32,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             className="transition-all duration-150 flex w-full px-4 py-6 md:w-1/2 lg:w-1/3 "
         >
             <div className="card flex flex-col  m-2 p-3 md:p-6 bg-white rounded-lg shadow-2xl">
-                <div className="">
+                <div className="flex-grow">
                     <p className="text-2xl uppercase text-gray-900 font-bold">
                         {product.name}
                     </p>
