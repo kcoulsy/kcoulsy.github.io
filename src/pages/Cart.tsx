@@ -16,15 +16,19 @@ const Cart: React.FC = () => {
                 </h2>
             </div>
             {!items.length ? (
-                <>
-                    <p data-test="cart-no-items">
+                <div className="w-100 flex flex-col justify-center items-center mt-4">
+                    <p data-test="cart-no-items" className="text-xl">
                         You currently have no items in your basket!
                     </p>
 
-                    <Link to={PATH_HOME} data-test="cart-link-home">
+                    <Link
+                        to={PATH_HOME}
+                        data-test="cart-link-home"
+                        className="mt-2 text-blue-500 text-md"
+                    >
                         Click Here to view the products again!
                     </Link>
-                </>
+                </div>
             ) : (
                 <div className="px-10">
                     <table className="w-full text-sm lg:text-base">
