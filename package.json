@@ -53,7 +53,12 @@
             "last 1 safari version"
         ]
     },
-    "devDependencies": {
+    "jest": {
+        "coverageReporters": [
+            "json-summary"
+        ]
+    },
+    "dev,Dependencies": {
         "@types/axios": "^0.14.0",
         "@types/enzyme": "^3.10.8",
         "@types/react-router-dom": "^5.1.7",
