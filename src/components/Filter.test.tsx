@@ -17,13 +17,13 @@ test('should render without error', () => {
     expect(component.length).toBe(1);
 });
 
-test('should render all options of ProductColor', () => {
-    const options = Object.values(ProductColor);
-    const wrapper = setup();
-    const optionEls = wrapper.find('[data-test="filter-option"]');
+// test('should render all options of ProductColor', () => {
+//     const options = Object.values(ProductColor);
+//     const wrapper = setup();
+//     const optionEls = wrapper.find('[data-test="filter-option"]');
 
-    expect(optionEls.length).toBe(options.length);
-});
+//     expect(optionEls.length).toBe(options.length);
+// });
 
 test('selecting an option should call onSelect', () => {
     const wrapper = setup();

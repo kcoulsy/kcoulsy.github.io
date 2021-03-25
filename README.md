@@ -1,6 +1,6 @@
 | Statements                  | Branches                | Functions                 | Lines             |
 | --------------------------- | ----------------------- | ------------------------- | ----------------- |
-| ![Statements](https://img.shields.io/badge/Coverage-Unknown%25-brightgreen.svg) | ![Branches](https://img.shields.io/badge/Coverage-Unknown%25-brightgreen.svg) | ![Functions](https://img.shields.io/badge/Coverage-Unknown%25-brightgreen.svg) | ![Lines](https://img.shields.io/badge/Coverage-Unknown%25-brightgreen.svg) |
+| ![Statements](https://img.shields.io/badge/Coverage-89.11%25-yellow.svg) | ![Branches](https://img.shields.io/badge/Coverage-76%25-red.svg) | ![Functions](https://img.shields.io/badge/Coverage-80%25-yellow.svg) | ![Lines](https://img.shields.io/badge/Coverage-88.78%25-yellow.svg) |
 
 # Getting Started with Create React App
 
